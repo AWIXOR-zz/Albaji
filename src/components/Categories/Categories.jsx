@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-// import Context from "../../Context";
 import {
   useCategory,
   useDispatchCategory,
@@ -17,7 +16,6 @@ const TabControl = styled.div`
   ${(props) => props.active && tw`bg-blue-500! text-gray-100!`}
 `;
 const Categories = () => {
-  //   const { methods, state } = useContext(Context);
   const { state } = useCategory();
   const { dispatch } = useDispatchCategory();
   console.log(state);
