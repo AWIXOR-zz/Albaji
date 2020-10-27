@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
+// import Context from "../../Context";
+import {
+  useCategory,
+  useDispatchCategory,
+} from "../../providers/CategoryProvider";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
@@ -12,18 +17,26 @@ const TabControl = styled.div`
   ${(props) => props.active && tw`bg-blue-500! text-gray-100!`}
 `;
 const Categories = () => {
-  const [activeTab, setActiveTab] = useState(categories[0]);
+  //   const { methods, state } = useContext(Context);
+  const { state } = useCategory();
+  const { dispatch } = useDispatchCategory();
+  console.log(state);
+  const [activeTab, setActiveTab] = useState(state.categories[0]);
+
+  useEffect(() => {
+    dispatch({ type: "SET_CATEGORY", activeCategory: activeTab });
+  }, [activeTab]);
 
   return (
     <div>
       <HeaderRow>
         <TabsControl>
-          {categories.map((tabName, index) => (
+          {state.categories.map((tabName, index) => (
             <TabControl
               key={index}
               active={activeTab === tabName}
               onClick={() => {
-                console.log("changing tabName state");
+                console.log("changing tabName state", tabName);
                 setActiveTab(tabName);
               }}
             >
@@ -37,5 +50,3 @@ const Categories = () => {
 };
 
 export default Categories;
-
-const categories = ["فقه", "شريعة", "اصول", "قانون"];
