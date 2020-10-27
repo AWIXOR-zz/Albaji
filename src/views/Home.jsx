@@ -19,7 +19,7 @@ const Home = () => {
           <TopColumn>
             <Categories />
           </TopColumn>
-          <ResponsiveVideoEmbed />
+          <ResponsiveVideoEmbed url="https://www.youtube.com/embed/ihRQfjOgRSM" />
         </RightColumn>
         <LeftColumn>
           <Episodes />
